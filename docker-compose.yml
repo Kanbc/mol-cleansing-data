@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  db:
+    container_name:  mol_mysql
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:  
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mol2562
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: mol2562
+      MYSQL_PASSWORD: mol2562
+  phpmyadmin:
+    container_name: mol_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on: 
+      - db
+    restart: always
+    ports:
+      - "9090:80"
+    environment:
+      - MYSQL_USERNAME="root"
+      - MYSQL_ROOT_PASSWORD="mol2562"
+
